@@ -372,13 +372,13 @@ span{
   align-items:center;
   justify-content:center;
 }
-
 .hero-image{
-  width: 70%;
-  max-width: 320px;
+  width: 100%;
+  max-width: 480px;
   height: auto;
-  animation:floatImage 4s ease-in-out infinite;
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.15));
+  animation: floatImage 4s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(218, 123, 6, 0.201));
+  will-change: transform;
 }
 
 @keyframes floatImage{
@@ -857,12 +857,9 @@ textarea:focus{
 
     scroll-margin-top: 80px;
   }
-  .hero-image{
-    width: 100%;
-  }
-  
+ 
 .pill{
-  margin-top: 2rem;
+
   justify-content: left;
 
 }
