@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BrewBliss · Milk Tea Shop Demo</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#home">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#home" aria-label="BrewBliss Home">
+        <span class="logo-mark" aria-hidden="true">🧋</span>
+        <span class="logo-text">MilkTea.</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <button class="burger" id="burger" type="button" aria-label="Open menu" aria-controls="navMenu" aria-expanded="false">
+          <span class="burger-lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="burger-icon-text" aria-hidden="true">☰</span>
+          <span class="burger-x-text" aria-hidden="true">✕</span>
+        </button>
+
+        <ul class="nav-menu" id="navMenu" role="list">
+          <li><a class="nav-link" href="#home">Home</a></li>
+          <li><a class="nav-link" href="#menu">Menu</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="cart-button" id="cartButton" type="button" aria-label="Open cart">
+        <span class="cart-icon" aria-hidden="true">🛒</span>
+        <span class="cart-badge" id="cartCount" aria-label="Items in cart">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-inner reveal">
+        <div class="hero-copy">
+          <div class="pill">Warm • Fresh • Wholesome</div>
+          <h1 class="hero-title reveal">Happiness in Every Sip</h1>
+          <p class="hero-subtitle reveal">Freshly brewed milk teas made to brighten your day and warm your heart.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#menu">Order Now</a>
+            <a class="btn btn-ghost" href="#about">Meet BrewBliss</a>
+          </div>
+        </div>
+
+        <div class="hero-art">
+            <img 
+              src="assets/hero img.png" 
+              alt="Premium milk tea"
+              class="hero-image"
+            />
+          </div>
+      </div>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="container section-head reveal">
+        <h2 class="section-title reveal">Menu Favorites</h2>
+        <p class="section-lead reveal">Tap “Add to Cart” to build your perfect sip.</p>
+      </div>
+
+      <div class="container menu-grid" id="menuGrid">
+        <!-- Cards injected by JS for easy cart wiring -->
+      </div>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="container about-inner reveal">
+        <div class="about-copy">
+          <h2 class="section-title reveal">A Cozy Corner for Tea Lovers</h2>
+          <p class="about-text reveal">
+            BrewBliss is where creamy milk tea meets slow mornings and sweet celebrations.
+            We brew with care, swirl flavors with joy, and craft every cup to brighten your day.
+          </p>
+          <p class="about-text">
+            From classic comfort to fruity surprises, our menu is designed to feel warm, friendly, and delightfully unforgettable.
+          </p>
+        </div>
+
+        <div class="about-card reveal" aria-hidden="true">
+          <div class="about-stats">
+            <div class="stat">
+              <div class="stat-num">8</div>
+              <div class="stat-label">Signature drinks</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">4.8★</div>
+              <div class="stat-label">Avg. customer love</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">Fresh</div>
+              <div class="stat-label">Daily batches</div>
+            </div>
+          </div>
+          <div class="about-card-art">
+            <div class="badge">Made with love</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="testimonials">
+      <div class="container section-head reveal">
+        <h2 class="section-title reveal">What Customers Say</h2>
+        <p class="section-lead reveal">Real vibes, imaginary reviews (but still delicious).</p>
+      </div>
+
+      <div class="container testimonials">
+        <article class="review reveal">
+          <div class="review-top">
+            <img class="avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23E9DCCB'/%3E%3Cstop offset='1' stop-color='%23C9A69C'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Ccircle cx='32' cy='28' r='13' fill='%23fff' opacity='0.55'/%3E%3Cpath d='M12 58c6-14 34-14 40 0' fill='%23fff' opacity='0.55'/%3E%3C/svg%3E" alt="" />
+            <div>
+              <div class="review-name">Lina T.</div>
+              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="review-text">“The Brown Sugar Boba is seriously addictive. Creamy, chewy, and so cozy.”</p>
+        </article>
+
+        <article class="review reveal">
+          <div class="review-top">
+            <img class="avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23F1E8D8'/%3E%3Cstop offset='1' stop-color='%23B8897B'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Ccircle cx='32' cy='28' r='13' fill='%23fff' opacity='0.55'/%3E%3Cpath d='M12 58c6-14 34-14 40 0' fill='%23fff' opacity='0.55'/%3E%3C/svg%3E" alt="" />
+            <div>
+              <div class="review-name">Marco P.</div>
+              <div class="stars" aria-label="4 out of 5 stars">★★★★☆</div>
+            </div>
+          </div>
+          <p class="review-text">“Thai Milk Tea tastes like a vacation. Sweet but balanced, and not too heavy.”</p>
+        </article>
+
+        <article class="review reveal">
+          <div class="review-top">
+            <img class="avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23F3E0E7'/%3E%3Cstop offset='1' stop-color='%239C6A65'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Ccircle cx='32' cy='28' r='13' fill='%23fff' opacity='0.55'/%3E%3Cpath d='M12 58c6-14 34-14 40 0' fill='%23fff' opacity='0.55'/%3E%3C/svg%3E" alt="" />
+            <div>
+              <div class="review-name">Sora K.</div>
+              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            </div>
+          </div>
+          <p class="review-text">“Cheese Foam Milk Tea is cloud-level smooth. My new go-to for late afternoons.”</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="container contact-inner reveal">
+        <div class="reveal">
+          <h2 class="section-title">Contact</h2>
+          <p class="section-lead">Questions, catering, or team sips—reach out anytime.</p>
+        </div>
+
+        <form class="contact-form reveal" id="contactForm">
+          <label>
+            <span class="label">Your Name</span>
+            <input type="text" name="name" placeholder="e.g., Jordan" required />
+          </label>
+          <label>
+            <span class="label">Email</span>
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            <span class="label">Message</span>
+            <textarea name="message" rows="4" placeholder="Tell us how we can help..." required></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Send Message</button>
+          <p class="form-note" id="contactNote" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">
+          <span class="logo-mark" aria-hidden="true">🧋</span>
+          <span class="footer-name">BrewBliss</span>
+        </div>
+        <p class="footer-text">Cozy milk tea brewed for everyday joy.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Visit Us</h3>
+        <p class="footer-text">123 Cozy Corner Street, Tea Town</p>
+        <p class="footer-text">Mon–Sat: 10:00 AM – 9:00 PM<br/>Sun: 11:00 AM – 7:00 PM</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Social</h3>
+        <ul class="social">
+          <li><a href="#" aria-label="Instagram">Instagram</a></li>
+          <li><a href="#" aria-label="TikTok">TikTok</a></li>
+          <li><a href="#" aria-label="Facebook">Facebook</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">© <span id="year"></span> BrewBliss. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <aside class="cart" id="cart" aria-hidden="true">
+    <div class="cart-overlay" id="cartOverlay" tabindex="-1" aria-hidden="true"></div>
+
+    <div class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="cart-header">
+        <h2 class="cart-title" id="cartTitle">Your Cart</h2>
+        <button class="cart-close" id="cartClose" type="button" aria-label="Close cart">✕</button>
+      </div>
+
+      <div class="cart-body">
+        <div class="cart-items" id="cartItems" aria-live="polite"></div>
+
+        <div class="cart-empty" id="cartEmpty">
+          <div class="cart-empty-icon" aria-hidden="true">🧺</div>
+          <div class="cart-empty-title">Cart is empty</div>
+          <div class="cart-empty-text">Add a drink to get started.</div>
+        </div>
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span class="summary-value" id="cartSubtotal">$0.00</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span class="summary-value" id="cartTotal">$0.00</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-wide" id="placeOrder" type="button">
+          Place Order
+        </button>
+        <p class="cart-footnote">Taxes and shipping calculated at checkout (demo).</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Order Confirm Modal -->
+  <div class="modal" id="orderModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+    <div class="modal-overlay" id="orderOverlay" data-close></div>
+    <div class="modal-card" role="document">
+      <div class="modal-top">
+        <div class="success-icon" aria-hidden="true">✅</div>
+        <h2 class="modal-title" id="orderTitle">Order Confirmed!</h2>
+        <p class="modal-text" id="orderText">Your milk tea is being prepared with cozy care.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" type="button" id="orderOk">Back to Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
+
