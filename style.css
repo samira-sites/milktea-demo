@@ -719,6 +719,20 @@ textarea:focus{
   border-top:1px solid var(--border);
 }
 
+.cart-footer label {
+  display: block;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.cart-footer input {
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
 .cart-header{
   display:flex;
   align-items:center;

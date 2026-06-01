@@ -232,21 +232,38 @@
       </div>
 
       <div class="cart-footer">
+
         <div class="cart-summary">
           <div class="summary-row">
             <span>Subtotal</span>
             <span class="summary-value" id="cartSubtotal">$0.00</span>
           </div>
+      
           <div class="summary-row summary-total">
             <span>Total</span>
             <span class="summary-value" id="cartTotal">$0.00</span>
           </div>
         </div>
-
+      
+        <!-- 👇 ADD THIS -->
+        <label>
+          Name
+          <input type="text" id="customerName" placeholder="Your name" required>
+        </label>
+      
+        <label>
+          Phone
+          <input type="tel" id="customerPhone" placeholder="Your phone number" required>
+        </label>
+      
         <button class="btn btn-primary btn-wide" id="placeOrder" type="button">
           Place Order
         </button>
-        <p class="cart-footnote">Taxes and shipping calculated at checkout (demo).</p>
+      
+        <p class="cart-footnote">
+          Taxes and shipping calculated at checkout (demo).
+        </p>
+      
       </div>
     </div>
   </aside>

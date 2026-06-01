@@ -261,21 +261,57 @@ function renderMenu() {
     });
   });
   
-  /* ORDER FLOW */
   
-  placeOrder.addEventListener("click", ()=>{
+ /* ORDER FLOW */
+ placeOrder.addEventListener("click", async ()=>{
+
+  if(cartData.length === 0){
+    alert("Your cart is empty.");
+    return;
+  }
+
+  // get inputs
+  const name = document.getElementById("customerName").value;
+  const phone = document.getElementById("customerPhone").value;
+
+  if(!name || !phone){
+    alert("Please enter your name and phone number.");
+    return;
+  }
+
+  try{
+    const response = await fetch("save-order.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+        cart: cartData
+      })
+    });
   
-    if(cartData.length === 0){
-      alert("Your cart is empty.");
-      return;
+    const result = await response.json();
+
+    if(result.success){
+
+      closeCart();
+
+      orderModal.classList.add("show");
+      orderModal.setAttribute("aria-hidden","false");
+
+    }else{
+      alert("Order failed.");
     }
-  
-    closeCart();
-  
-    orderModal.classList.add("show");
-    orderModal.setAttribute("aria-hidden","false");
-  });
-  
+
+  }catch(error){
+    console.error(error);
+    alert("Server error.");
+  }
+
+});
+
   function closeModal(){
     orderModal.classList.remove("show");
     orderModal.setAttribute("aria-hidden","true");
