@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BrewBliss · Milk Tea Shop Demo</title>
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -59,7 +59,7 @@
 
         <div class="hero-art">
             <img 
-              src="assets/hero.png" 
+              src="assets/images/hero.png" 
               alt="Premium milk tea"
               class="hero-image"
             />
@@ -210,7 +210,23 @@
       <div class="footer-bottom">© <span id="year"></span> BrewBliss. All rights reserved.</div>
     </div>
   </footer>
+<!-- Tracking Modal -->
+<button onclick="openTrackModal()">Track Order</button>
 
+<div id="trackModal" class="track-modal">
+  <div class="track-box">
+
+    <button class="track-close" onclick="closeTrack()">✕</button>
+
+    <h2>📦 Order Tracking</h2>
+
+    <input type="text" id="trackPhone" placeholder="Enter phone number" />
+    <button onclick="startTracking()">Track Order</button>
+
+    <div id="trackResult" style="margin-top:20px;"></div>
+
+  </div>
+</div>
   <!-- Cart Sidebar -->
   <aside class="cart" id="cart" aria-hidden="true">
     <div class="cart-overlay" id="cartOverlay" tabindex="-1" aria-hidden="true"></div>
@@ -283,7 +299,7 @@
     </div>
   </div>
 
-  <script src="./script.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
 </html>
 

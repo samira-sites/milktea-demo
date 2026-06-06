@@ -1,5 +1,5 @@
 /* HERO IMAGE ANIMATION */
-
+console.log("script loaded");
 const heroImage = document.querySelector(".hero-image");
 
 if(heroImage){
@@ -35,56 +35,56 @@ const drinks = [
     id: 1,
     name: "Classic Milk Tea",
     price: 4.50,
-    image: "assets/classic-milktea.webp",
+    image: "assets/images/classic-milktea.webp",
     desc: "Creamy black tea with chewy pearls."
   },
   {
     id: 2,
     name: "Taro Milk Tea",
     price: 5.20,
-    image: "assets/taro-milktea.webp",
+    image: "assets/images/taro-milktea.webp",
     desc: "Nutty taro blended into silky milk tea."
   },
   {
     id: 3,
     name: "Brown Sugar Boba",
     price: 5.80,
-    image: "assets/brown-sugar-boba.webp",
+    image: "assets/images/brown-sugar-boba.webp",
     desc: "Rich caramelized brown sugar swirl."
   },
   {
     id: 4,
     name: "Matcha Latte",
     price: 5.40,
-    image: "assets/matcha-latte.webp",
+    image: "assets/images/matcha-latte.webp",
     desc: "Smooth earthy matcha with fresh milk."
   },
   {
     id: 5,
     name: "Strawberry Fruit Tea",
     price: 4.90,
-    image: "assets/Strawberry Fruit Tea.webp",
+    image: "assets/images/Strawberry Fruit Tea.webp",
     desc: "Refreshing berries with fruity tea."
   },
   {
     id: 6,
     name: "Thai Milk Tea",
     price: 5.00,
-    image: "assets/Thai Milk Tea.webp",
+    image: "assets/images/Thai Milk Tea.webp",
     desc: "Bold Thai tea with creamy sweetness."
   },
   {
     id: 7,
     name: "Wintermelon Tea",
     price: 4.70,
-    image: "assets/Wintermelon Tea.webp",
+    image: "assets/images/Wintermelon Tea.webp",
     desc: "Light and sweet traditional favorite."
   },
   {
     id: 8,
     name: "Cheese Foam Milk Tea",
     price: 5.90,
-    image: "assets/Cheese Foam Milk Tea.webp",
+    image: "assets/images/Cheese Foam Milk Tea.webp",
     desc: "Sweet tea topped with creamy foam."
   }
 ];
@@ -280,7 +280,7 @@ function renderMenu() {
   }
 
   try{
-    const response = await fetch("save-order.php", {
+    const response = await fetch("api/save-order.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -364,3 +364,80 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal, .reveal-left, .reveal-right")
   .forEach(el => observer.observe(el));
+
+    // =========================
+//  LIVE REFRESH
+// =========================
+let trackInterval = null;
+
+function startTracking() {
+  const phone = document.getElementById("trackPhone").value;
+
+  if (!phone) {
+    alert("Enter phone number");
+    return;
+  }
+
+  // stop old loop if exists
+  if (trackInterval) clearInterval(trackInterval);
+
+  fetchOrder(phone); // first load
+
+  // LIVE refresh every 5 seconds
+  trackInterval = setInterval(() => {
+    fetchOrder(phone);
+  }, 5000);
+}
+
+function fetchOrder(phone) {
+  const box = document.getElementById("trackResult");
+
+  box.innerHTML = "Loading order...";
+
+  fetch(`api/get-order.php?phone=${phone}`)
+    .then(res => res.json())
+    .then(data => {
+
+      if (!data.success) {
+        box.innerHTML = "❌ No order found";
+        return;
+      }
+
+      const order = data.order;
+
+      let itemsHTML = "";
+      data.items.forEach(item => {
+        itemsHTML += `<li>${item.drink_name} × ${item.quantity}</li>`;
+      });
+
+      box.innerHTML = `
+        <div class="status">
+          <h3>Order #${order.id}</h3>
+          <p><b>Name:</b> ${order.customer_name}</p>
+          <p><b>Status:</b> ${order.status}</p>
+          <p><b>Total:</b> $${order.total}</p>
+          <p><b>Date:</b> ${order.created_at}</p>
+          <h4>Items</h4>
+          <ul>${itemsHTML}</ul>
+        </div>
+      `;
+    })
+    .catch(err => {
+      box.innerHTML = "❌ Server error";
+      console.log(err);
+    });
+}
+
+function openTrackModal(){
+  document.getElementById("trackModal").classList.add("show");
+}
+
+function closeTrack(){
+  document.getElementById("trackModal").classList.remove("show");
+
+  // stop live tracking when closed
+  if(trackInterval){
+    clearInterval(trackInterval);
+    trackInterval = null;
+  }
+}

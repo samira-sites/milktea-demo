@@ -4,18 +4,18 @@ ini_set('display_errors', 1);
 
 file_put_contents("debug.txt", file_get_contents("php://input"));
 
-$conn = new mysqli(
-    "localhost",
-    "root",
-    "",
-    "milktea_shop"
-);
+require_once '../includes/db.php';
 
+$conn = new mysqli(
+    $_ENV['DB_HOST'],
+    $_ENV['DB_USER'],
+    $_ENV['DB_PASS'],
+    $_ENV['DB_NAME']
+);
 if($conn->connect_error){
     die("Database error");
 }
 
-header("Content-Type: application/json");
 
 /* READ JSON */
 $data = json_decode(file_get_contents("php://input"), true);
