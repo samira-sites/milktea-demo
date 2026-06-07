@@ -1,10 +1,10 @@
 <?php
 
 $conn = new mysqli(
-    "localhost",
-    "YOUR_DB_USER",
-    "YOUR_DB_PASSWORD",
-    "YOUR_DB_NAME"
+    $_ENV['DB_HOST'],
+    $_ENV['DB_USER'],
+    $_ENV['DB_PASS'],
+    $_ENV['DB_NAME']
 );
 
 if ($conn->connect_error) {
