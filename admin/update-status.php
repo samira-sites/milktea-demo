@@ -1,12 +1,7 @@
 <?php
-
 require_once '../includes/config.php';
 
-if ($conn->connect_error) {
-    die("Database error");
-}
-
-$id = $_GET['id'] ?? null;
+$id     = $_GET['id'] ?? null;
 $status = $_GET['status'] ?? null;
 
 if (!$id || !$status) {
@@ -19,4 +14,3 @@ $stmt->execute();
 
 header("Location: index.php");
 exit;
-?>

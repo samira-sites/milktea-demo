@@ -1,114 +1,70 @@
 <?php
+require_once __DIR__ . '/../includes/config.php';
 
 header('Content-Type: application/json');
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-require_once '../includes/config.php';
-
-/* FORCE CHECK DB */
-if (!$conn) {
-    echo json_encode([
-        "success" => false,
-        "message" => "DB object not created"
-    ]);
+// Block non-POST requests
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
     exit;
 }
 
-/* READ INPUT */
-$raw = file_get_contents("php://input");
-$data = json_decode($raw, true);
+// Read JSON body from JavaScript fetch()
+$data = json_decode(file_get_contents('php://input'), true);
 
 if (!$data) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Invalid JSON",
-        "raw" => $raw
-    ]);
+    echo json_encode(['success' => false, 'message' => 'Invalid or empty request body']);
     exit;
 }
 
-$cart = $data["cart"] ?? [];
-$name = $data["name"] ?? "Guest";
-$phone = $data["phone"] ?? "";
+// Sanitize inputs
+$name  = trim($data['name'] ?? '');
+$phone = trim($data['phone'] ?? '');
+$cart  = $data['cart'] ?? [];
 
-/* TEST DB CONNECTION FIRST */
-if ($conn->connect_error) {
-    echo json_encode([
-        "success" => false,
-        "message" => "DB connection error",
-        "error" => $conn->connect_error
-    ]);
+// Validate
+if (!$name || !$phone || empty($cart)) {
+    echo json_encode(['success' => false, 'message' => 'Name, phone, and cart are required']);
     exit;
 }
 
-/* CALCULATE TOTAL */
+// Calculate total
 $total = 0;
 foreach ($cart as $item) {
-    $total += $item["price"] * $item["qty"];
+    $total += floatval($item['price']) * intval($item['qty']);
 }
 
-/* INSERT ORDER */
-$stmt = $conn->prepare("INSERT INTO orders (customer_name, total, phone) VALUES (?, ?, ?)");
-
-if (!$stmt) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Prepare failed (orders)",
-        "error" => $conn->error
-    ]);
-    exit;
-}
-
-$stmt->bind_param("sds", $name, $total, $phone);
+// Insert into orders table
+$stmt = $conn->prepare(
+    "INSERT INTO orders (customer_name, phone, total, status, created_at)
+     VALUES (?, ?, ?, 'Pending', NOW())"
+);
+$stmt->bind_param("ssd", $name, $phone, $total);
 
 if (!$stmt->execute()) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Execute failed (orders)",
-        "error" => $stmt->error
-    ]);
+    echo json_encode(['success' => false, 'message' => 'Failed to save order']);
     exit;
 }
 
 $orderId = $conn->insert_id;
 
-/* INSERT ITEMS */
+// Insert each item into order_items table
+$itemStmt = $conn->prepare(
+    "INSERT INTO order_items (order_id, drink_name, quantity, price)
+     VALUES (?, ?, ?, ?)"
+);
+
 foreach ($cart as $item) {
+    $drinkName = trim($item['name']);
+    $qty       = intval($item['qty']);
+    $price     = floatval($item['price']);
 
-    $stmt2 = $conn->prepare("
-        INSERT INTO order_items (order_id, drink_name, price, quantity)
-        VALUES (?, ?, ?, ?)
-    ");
+    $itemStmt->bind_param("isid", $orderId, $drinkName, $qty, $price);
 
-    if (!$stmt2) {
-        echo json_encode([
-            "success" => false,
-            "message" => "Prepare failed (items)",
-            "error" => $conn->error
-        ]);
-        exit;
-    }
-
-    $stmt2->bind_param(
-        "isdi",
-        $orderId,
-        $item["name"],
-        $item["price"],
-        $item["qty"]
-    );
-
-    if (!$stmt2->execute()) {
-        echo json_encode([
-            "success" => false,
-            "message" => "Execute failed (items)",
-            "error" => $stmt2->error
-        ]);
+    if (!$itemStmt->execute()) {
+        echo json_encode(['success' => false, 'message' => 'Failed to save order items']);
         exit;
     }
 }
 
-echo json_encode([
-    "success" => true,
-    "orderId" => $orderId
-]);
+echo json_encode(['success' => true, 'order_id' => $orderId]);

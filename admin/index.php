@@ -5,8 +5,8 @@ if ($conn->connect_error) {
     die("Database error");
 }
 
-
 $resultTable = $conn->query("SELECT * FROM orders ORDER BY id DESC");
+$resultCards = $conn->query("SELECT * FROM orders ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>
