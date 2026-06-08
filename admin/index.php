@@ -1,11 +1,11 @@
 <?php
-require_once '../includes/db.php';
+require_once '../includes/config.php';
 
 if ($conn->connect_error) {
     die("Database error");
 }
 
-$resultCards = $conn->query("SELECT * FROM orders ORDER BY id DESC");
+
 $resultTable = $conn->query("SELECT * FROM orders ORDER BY id DESC");
 ?>
 
