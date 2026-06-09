@@ -1,1 +1,0 @@
-{"name":"Samira Omar","phone":"09999","cart":[{"id":1,"name":"Classic Milk Tea","price":4.5,"image":"assets/classic-milktea.webp","desc":"Creamy black tea with chewy pearls.","qty":1}]}
